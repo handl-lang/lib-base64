@@ -2,7 +2,6 @@ use std::sync::Arc;
 
 use base64::{engine::Engine as _, prelude::BASE64_STANDARD};
 use handl_platform::{EvalContext, EvalError, Function};
-use handl_lib_encoding::{Encoding, EncodingError};
 use handl_plugin_lib_handl::{OpRegistry, RuntimePredicateChecker};
 use serde_json::Value;
 
@@ -12,38 +11,6 @@ use serde_json::Value;
 
 /// The op names declared in `base64.hnl`.
 pub const BASE64_OPS: &[&str] = &["base64.encode", "base64.decode", "base64.base64"];
-
-// ---------------------------------------------------------------------------
-// Encoding trait impl (backward compat for plugin-lib-utils)
-// ---------------------------------------------------------------------------
-
-/// Base64 encoding (implements the [`Encoding`] trait for
-/// [`plugin-lib-utils`]'s `EncodingRegistry`).
-#[derive(Debug, Clone, Copy, Default)]
-pub struct Base64;
-
-impl Encoding for Base64 {
-    fn encode(&self, value: &Value) -> Result<Value, EncodingError> {
-        let s = value
-            .as_str()
-            .ok_or_else(|| EncodingError::Message("base64.encode expects a string".to_string()))?;
-        let encoded = BASE64_STANDARD.encode(s.as_bytes());
-        Ok(Value::String(encoded))
-    }
-
-    fn decode(&self, value: &Value) -> Result<Value, EncodingError> {
-        let s = value
-            .as_str()
-            .ok_or_else(|| EncodingError::Message("base64.decode expects a string".to_string()))?;
-        let decoded = BASE64_STANDARD
-            .decode(s)
-            .map_err(|e| EncodingError::Message(format!("base64 decode error: {e}")))?;
-        let out = String::from_utf8(decoded).map_err(|e| {
-            EncodingError::Message(format!("base64 decode is not valid utf-8: {e}"))
-        })?;
-        Ok(Value::String(out))
-    }
-}
 
 // ---------------------------------------------------------------------------
 // Function impls (the handls — Rust bodies for the `op` declarations)

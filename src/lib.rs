@@ -5,6 +5,8 @@
 
 pub const BASE64_HNL: &str = include_str!("index.hnl");
 
+pub mod codec;
 pub mod ops;
 
-pub use ops::{BASE64_OPS, base64_op_registry};
+pub use codec::{register, Base64};
+pub use ops::{base64_op_registry, BASE64_OPS};
