@@ -1,0 +1,16 @@
+from "./index" import * as m
+
+test_encode_empty := assert m.encode("") = ""
+test_encode_f := assert m.encode("f") = "Zg=="
+test_encode_fo := assert m.encode("fo") = "Zm8="
+test_encode_foo := assert m.encode("foo") = "Zm9v"
+test_encode_foob := assert m.encode("foob") = "Zm9vYg=="
+test_encode_fooba := assert m.encode("fooba") = "Zm9vYmE="
+test_encode_foobar := assert m.encode("foobar") = "Zm9vYmFy"
+test_decode_empty := assert m.decode("") = ""
+test_decode_f := assert m.decode("Zg==") = "f"
+test_decode_fo := assert m.decode("Zm8=") = "fo"
+test_decode_foo := assert m.decode("Zm9v") = "foo"
+test_decode_foobar := assert m.decode("Zm9vYmFy") = "foobar"
+test_roundtrip := assert m.decode(m.encode("hello world!")) = "hello world!"
+test_roundtrip_utf8 := assert m.decode(m.encode("héllo ✓")) = "héllo ✓"

@@ -1,0 +1,40 @@
+--- `base64.decode` — pure-Handl base64 decoding (RFC 4648).
+ALPHA := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+export decode := (s) ~> do {
+  out := []
+  q0 := 0
+  q1 := 0
+  q2 := 0
+  cnt := 0
+  for c in char.chars(s) { do {
+    if c == "=" { do {} } else { do {
+      v := str.find(ALPHA, c)
+      if v < 0 { throw "base64.decode: invalid digit" } else { do {} }
+      if cnt == 0 { do { q0 := math.shl(v, 18) } } else {
+        if cnt == 1 { do { q1 := math.shl(v, 12) } } else {
+          if cnt == 2 { do { q2 := math.shl(v, 6) } } else { do {
+            n := math.bit_or(math.bit_or(q0, q1), math.bit_or(q2, v))
+            out := [...out,
+              math.bit_and(math.shr(n, 16), 255),
+              math.bit_and(math.shr(n, 8), 255),
+              math.bit_and(n, 255)]
+          } }
+        }
+      }
+      cnt := if cnt == 3 { 0 } else { cnt + 1 }
+    } }
+  } }
+  if cnt == 2 { do {
+    n := math.bit_or(q0, q1)
+    out := [...out, math.bit_and(math.shr(n, 16), 255)]
+  } } else {
+    if cnt == 3 { do {
+      n := math.bit_or(math.bit_or(q0, q1), q2)
+      out := [...out,
+        math.bit_and(math.shr(n, 16), 255),
+        math.bit_and(math.shr(n, 8), 255)]
+    } } else { do {} }
+  }
+  bytes.utf8_decode(bytes.from_list(out))
+}

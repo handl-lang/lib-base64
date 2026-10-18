@@ -1,0 +1,45 @@
+--- `base64.encode` — pure-Handl base64 encoding (RFC 4648).
+ALPHA := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+emit4 := (n) ~> do {
+  char.at(ALPHA, math.shr(n, 18))
+    + char.at(ALPHA, math.bit_and(math.shr(n, 12), 63))
+    + char.at(ALPHA, math.bit_and(math.shr(n, 6), 63))
+    + char.at(ALPHA, math.bit_and(n, 63))
+}
+
+export encode := (s) ~> do {
+  acc := ""
+  n := 0
+  cnt := 0
+  prev := 0
+  last := 0
+  for b in bytes.to_list(bytes.utf8_encode(s)) { do {
+    prev := last
+    last := b
+    if cnt == 0 { do { n := math.shl(b, 16) } } else {
+      if cnt == 1 { do { n := math.bit_or(n, math.shl(b, 8)) } } else { do {
+        n := math.bit_or(n, b)
+        acc := acc + emit4(n)
+        n := 0
+      } }
+    }
+    cnt := if cnt == 2 { 0 } else { cnt + 1 }
+  } }
+  if cnt == 1 { do {
+    acc := acc
+      + char.at(ALPHA, math.shr(math.shl(last, 16), 18))
+      + char.at(ALPHA, math.bit_and(math.shr(math.shl(last, 16), 12), 63))
+      + "=="
+  } } else {
+    if cnt == 2 { do {
+      n := math.bit_or(math.shl(prev, 16), math.shl(last, 8))
+      acc := acc
+        + char.at(ALPHA, math.shr(n, 18))
+        + char.at(ALPHA, math.bit_and(math.shr(n, 12), 63))
+        + char.at(ALPHA, math.bit_and(math.shr(n, 6), 63))
+        + "="
+    } } else { do {} }
+  }
+  acc
+}
