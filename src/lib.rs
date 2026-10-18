@@ -17,3 +17,6 @@ pub const BASE64_SOURCES: &[(&str, &str, &[&str])] = &[
     ("encode", include_str!("encode.hnl"), &["encode"]),
     ("decode", include_str!("decode.hnl"), &["decode"]),
 ];
+
+/// Flattened single-source `.hnl` (for `stdlib::MODULES` table rows).
+pub const BASE64_FLAT_HNL: &str = include_str!("index_flat.hnl");
