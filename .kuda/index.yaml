@@ -1,0 +1,23 @@
+name: lib-base64
+root: /home/luis/GitHub/handl-lang/lib-base64
+purpose: ''
+modules:
+- handl-lib-base64
+- lib-base64
+commands:
+- cargo check
+- cargo test --workspace
+provenance:
+  files:
+  - Cargo.toml
+  - src/ops.rs
+  - src/codec.rs
+  - src/lib.rs
+  hashes:
+  - f302f389f4a46011553fc12365d8b4cbcbea8806
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - e2d32c5b9f044ac38fa91c64204bf543d4f9f541
+  - e07641460c41ec058b54453570ed058c65ab7f69
+  commit_sha: ed4961c1fb6d9bf5356dd273fd6ea8a5345eb4c4
+  generated_at: '1792281166'
+  generator: kuda/0.1.0

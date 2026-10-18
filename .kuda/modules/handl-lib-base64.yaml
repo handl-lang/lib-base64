@@ -1,0 +1,26 @@
+name: handl-lib-base64
+path: Cargo.toml
+purpose: 'base64: Handl stdlib codec (ADR-0128 split).'
+api:
+- name: handl-lib-base64
+  kind: module
+  file: Cargo.toml
+  line: 1
+  module: handl-lib-base64
+deps:
+- base64
+- handl-lib-encoding
+- handl-platform
+- handl-plugin-lib-handl
+- serde_json
+notes: ''
+verify:
+- Cargo.toml
+provenance:
+  files:
+  - Cargo.toml
+  hashes:
+  - f302f389f4a46011553fc12365d8b4cbcbea8806
+  commit_sha: ed4961c1fb6d9bf5356dd273fd6ea8a5345eb4c4
+  generated_at: '1792281166'
+  generator: kuda-template/0.1.0

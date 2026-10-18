@@ -1,0 +1,167 @@
+name: lib-base64
+path: src/ops.rs
+purpose: lib-base64
+api:
+- name: BASE64_OPS
+  kind: const
+  file: src/ops.rs
+  line: 13
+  module: lib-base64
+- name: Base64Encode
+  kind: type
+  file: src/ops.rs
+  line: 24
+  module: lib-base64
+- name: call
+  kind: function
+  file: src/ops.rs
+  line: 27
+  module: lib-base64
+- name: Base64Decode
+  kind: type
+  file: src/ops.rs
+  line: 48
+  module: lib-base64
+- name: call
+  kind: function
+  file: src/ops.rs
+  line: 51
+  module: lib-base64
+- name: Base64GuaranteeChecker
+  kind: type
+  file: src/ops.rs
+  line: 91
+  module: lib-base64
+- name: check_requires
+  kind: function
+  file: src/ops.rs
+  line: 94
+  module: lib-base64
+- name: check_guarantee
+  kind: function
+  file: src/ops.rs
+  line: 99
+  module: lib-base64
+- name: base64_op_registry
+  kind: function
+  file: src/ops.rs
+  line: 127
+  module: lib-base64
+- name: Base64Name
+  kind: type
+  file: src/ops.rs
+  line: 141
+  module: lib-base64
+- name: call
+  kind: function
+  file: src/ops.rs
+  line: 144
+  module: lib-base64
+- name: Base64
+  kind: type
+  file: src/codec.rs
+  line: 9
+  module: lib-base64
+- name: encode
+  kind: function
+  file: src/codec.rs
+  line: 12
+  module: lib-base64
+- name: decode
+  kind: function
+  file: src/codec.rs
+  line: 20
+  module: lib-base64
+- name: register
+  kind: function
+  file: src/codec.rs
+  line: 36
+  module: lib-base64
+- name: BASE64_HNL
+  kind: const
+  file: src/lib.rs
+  line: 6
+  module: lib-base64
+- name: codec
+  kind: module
+  file: src/lib.rs
+  line: 8
+  module: lib-base64
+- name: ops
+  kind: module
+  file: src/lib.rs
+  line: 9
+  module: lib-base64
+deps:
+- base64
+- handl_platform
+- handl_plugin_lib_handl
+- serde_json
+- handl_lib_encoding
+- serde_json
+- base64
+- base64
+- codec
+- ops
+notes: ''
+verify:
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/ops.rs
+- src/codec.rs
+- src/codec.rs
+- src/codec.rs
+- src/codec.rs
+- src/lib.rs
+- src/lib.rs
+- src/lib.rs
+provenance:
+  files:
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/ops.rs
+  - src/codec.rs
+  - src/codec.rs
+  - src/codec.rs
+  - src/codec.rs
+  - src/lib.rs
+  - src/lib.rs
+  - src/lib.rs
+  hashes:
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - bbc2cadb7f95c2449f6c2b486e0f98d51350e6d9
+  - e2d32c5b9f044ac38fa91c64204bf543d4f9f541
+  - e2d32c5b9f044ac38fa91c64204bf543d4f9f541
+  - e2d32c5b9f044ac38fa91c64204bf543d4f9f541
+  - e2d32c5b9f044ac38fa91c64204bf543d4f9f541
+  - e07641460c41ec058b54453570ed058c65ab7f69
+  - e07641460c41ec058b54453570ed058c65ab7f69
+  - e07641460c41ec058b54453570ed058c65ab7f69
+  commit_sha: ed4961c1fb6d9bf5356dd273fd6ea8a5345eb4c4
+  generated_at: '1792281166'
+  generator: kuda-template/0.1.0
