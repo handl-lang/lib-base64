@@ -10,3 +10,7 @@ op "base64.decode" : String -> String
 --- pure-handl impls (the module arrows):
 from "./encode.hnl" export encode
 from "./decode.hnl" export decode
+
+cap "base64.codec"
+op "base64.codec" : () -> Value
+export codec := () ~> ({ "type": "codec", "name": "base64", "encode": encode, "decode": decode })
