@@ -9,3 +9,11 @@ pub mod ops;
 
 pub use codec::{register, Base64};
 pub use ops::{base64_op_registry, BASE64_OPS};
+
+/// `.hnl` package source set — index + sibling files (wired into kits via
+/// `handl_module_from_sources`).
+pub const BASE64_FUNCS: &[&str] = &["encode","decode"];
+pub const BASE64_SOURCES: &[(&str, &str, &[&str])] = &[
+    ("encode", include_str!("encode.hnl"), &["encode"]),
+    ("decode", include_str!("decode.hnl"), &["decode"]),
+];
