@@ -12,3 +12,7 @@ src/ops.rs      the Rust atoms
 pkg.hnl         { modules: ["base64"] }
 ci.sh           bupha entry
 ```
+
+## License
+
+MIT.
