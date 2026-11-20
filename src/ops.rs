@@ -1,8 +1,7 @@
 use std::sync::Arc;
 
 use base64::{engine::Engine as _, prelude::BASE64_STANDARD};
-use handl_platform::{EvalContext, EvalError, Function};
-use handl_plugin_lib_handl::{OpRegistry, RuntimePredicateChecker};
+use handl_ops::{Op, OpContext, OpError, OpRegistry, RuntimePredicateChecker};
 use serde_json::Value;
 
 /// The handl source declaring the base64 `op` interface — the single source
@@ -23,10 +22,10 @@ pub const BASE64_OPS: &[&str] = &["base64.encode", "base64.decode", "base64.base
 #[derive(Debug, Clone, Copy)]
 pub struct Base64Encode;
 
-impl Function for Base64Encode {
-    fn call(&self, args: &[Value], _ctx: &mut EvalContext) -> Result<Value, EvalError> {
+impl Op for Base64Encode {
+    fn call(&self, args: &[Value], _ctx: &mut dyn OpContext) -> Result<Value, OpError> {
         if args.len() != 1 {
-            return Err(EvalError::TypeMismatch(format!(
+            return Err(OpError::TypeMismatch(format!(
                 "expected {} args, got {}",
                 1,
                 args.len()
@@ -34,7 +33,7 @@ impl Function for Base64Encode {
         }
         let s = args[0]
             .as_str()
-            .ok_or_else(|| EvalError::Other("base64.encode expects a string".to_string()))?;
+            .ok_or_else(|| OpError::Other("base64.encode expects a string".to_string()))?;
         let encoded = BASE64_STANDARD.encode(s.as_bytes());
         Ok(Value::String(encoded))
     }
@@ -47,10 +46,10 @@ impl Function for Base64Encode {
 #[derive(Debug, Clone, Copy)]
 pub struct Base64Decode;
 
-impl Function for Base64Decode {
-    fn call(&self, args: &[Value], _ctx: &mut EvalContext) -> Result<Value, EvalError> {
+impl Op for Base64Decode {
+    fn call(&self, args: &[Value], _ctx: &mut dyn OpContext) -> Result<Value, OpError> {
         if args.len() != 1 {
-            return Err(EvalError::TypeMismatch(format!(
+            return Err(OpError::TypeMismatch(format!(
                 "expected {} args, got {}",
                 1,
                 args.len()
@@ -58,12 +57,12 @@ impl Function for Base64Decode {
         }
         let s = args[0]
             .as_str()
-            .ok_or_else(|| EvalError::Other("base64.decode expects a string".to_string()))?;
+            .ok_or_else(|| OpError::Other("base64.decode expects a string".to_string()))?;
         let decoded = BASE64_STANDARD
             .decode(s)
-            .map_err(|e| EvalError::Other(format!("base64 decode error: {e}")))?;
+            .map_err(|e| OpError::Other(format!("base64 decode error: {e}")))?;
         let out = String::from_utf8(decoded)
-            .map_err(|e| EvalError::Other(format!("base64 decode is not valid utf-8: {e}")))?;
+            .map_err(|e| OpError::Other(format!("base64 decode is not valid utf-8: {e}")))?;
         Ok(Value::String(out))
     }
 }
@@ -140,14 +139,14 @@ pub fn base64_op_registry() -> OpRegistry {
 #[derive(Debug, Clone, Copy)]
 pub struct Base64Name;
 
-impl Function for Base64Name {
+impl Op for Base64Name {
     fn call(
         &self,
         args: &[serde_json::Value],
-        _ctx: &mut EvalContext,
-    ) -> Result<serde_json::Value, EvalError> {
+        _ctx: &mut dyn OpContext,
+    ) -> Result<serde_json::Value, OpError> {
         if !args.is_empty() {
-            return Err(EvalError::TypeMismatch(format!(
+            return Err(OpError::TypeMismatch(format!(
                 "expected {} args, got {}",
                 0,
                 args.len(),
