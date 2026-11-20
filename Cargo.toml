@@ -2,9 +2,11 @@
 name = "handl-lib-base64"
 version = "0.1.0"
 edition = "2024"
-description = "base64: Handl stdlib codec (ADR-0128 split)."
-license = "MIT OR Apache-2.0"
+description = "Base64 codec — Handl stdlib, implements the Encoding trait from lib-encoding."
+license = "MIT"
 repository = "https://github.com/handl-lang/lib-base64"
+readme = "README.md"
+homepage = "https://github.com/handl-lang/lib-base64"
 
 [dependencies]
 handl-ops = { git = "https://github.com/handl-lang/kernel", branch = "main" }

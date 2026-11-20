@@ -1,1 +1,8 @@
-{ modules: ["base64"] }
+{
+  modules: ["base64"],
+  name: "base64",
+  description: "Base64 codec — Handl stdlib, implements the Encoding trait from lib-encoding.",
+  license: "MIT",
+  keywords: ["base64", "codec", "encoding", "stdlib"],
+  homepage: "https://github.com/handl-lang/lib-base64",
+}
