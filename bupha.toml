@@ -6,7 +6,7 @@
 
 [[repos]]
 name = "handl-lang/lib-base64"
-dir = "/home/luis/GitHub/handl-lang/lib-base64"
+dir = "~/GitHub/handl-lang/lib-base64"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
