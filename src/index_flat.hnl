@@ -89,9 +89,9 @@ base64_decode := (s) ~> do {
 --- base64.decode -- decode a base64 string.
 cap "base64.encode"
 cap "base64.decode"
-op "base64.encode" : String -> String
+op "base64.encode" : String ~> String
   guarantee: IsBase64(output)
-op "base64.decode" : String -> String
+op "base64.decode" : String ~> String
   guarantee: True
 
 --- pure-handl impls (the module arrows):
