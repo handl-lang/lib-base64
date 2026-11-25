@@ -2,6 +2,7 @@
 name = "handl-lib-base64"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
 description = "Base64 codec — Handl stdlib, implements the Encoding trait from lib-encoding."
 license = "MIT"
 repository = "https://github.com/handl-lang/lib-base64"
