@@ -1,7 +1,7 @@
 # lib-base64
 
 `base64` — Handl stdlib codec implementing the `Encoding` trait from
-`lib-encoding`. Hybrid package: `.hnl` surface plus Rust atoms.
+`lib-encoding`. Package: `.hnl` surface plus a const-only Rust shim crate (ops pruned post-parity).
 
 ## Layout
 
@@ -10,7 +10,7 @@
 | `src/index.hnl`, `src/index_flat.hnl` | the `.hnl` interface |
 | `src/encode.hnl`, `src/decode.hnl` | codec arrows |
 | `src/base64.test.hnl` | `.hnl` tests (gated by `hnl test`) |
-| `src/lib.rs`, `src/docs/base64.yml` | Rust atoms + docs spec |
+| `src/lib.rs`, `src/docs/base64.yml` | const-only shim + docs spec |
 | `Cargo.toml`, `xtask/` | Rust crate + vendored repo gate |
 | `pkg.hnl`, `scripts/hnl-gate.sh` | manifest + `.hnl` gate |
 | `workflows/gate.yaml` | CI — shared `handl-gates` campaign |
